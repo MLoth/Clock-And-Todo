@@ -4,4 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+// Tailwind css framework import
+import './assets/tailwind.css';
+
 createApp(App).use(store).use(router).mount('#app')
