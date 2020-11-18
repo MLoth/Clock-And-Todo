@@ -7,7 +7,12 @@ module.exports = {
 	purge: false, // We did this manually
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				// bg, text, border
+				theme: "var(--global-theme-color)"
+			}
+		}
 	},
 
 	variants: {},
