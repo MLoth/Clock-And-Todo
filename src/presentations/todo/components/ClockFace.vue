@@ -1,10 +1,19 @@
 <template>
-	<div class="clock block relative">
-		<span class="clock-pointer clock-hour"></span>
-		<span class="clock-pointer clock-minutes"></span>
-		<span class="clock-pointer clock-seconds"></span>
+	<div class="clock relative">
+		<span
+			:style="`transform: rotate(${degrees.hour}deg)`"
+			class="clock-pointer absolute block rounded-lg bg-gray-900 clock-pointer--hour"
+		></span>
+		<span
+			:style="`transform: rotate(${degrees.minute}deg)`"
+			class="clock-pointer absolute block rounded-lg bg-gray-900 clock-pointer--minutes"
+		></span>
+		<span
+			:style="`transform: rotate(${degrees.second}deg)`"
+			class="clock-pointer absolute block rounded-lg bg-theme clock-pointer--seconds"
+		></span>
 
-		<span class="clock-center"></span>
+		<span class="clock-center absolute block rounded-full bg-white"></span>
 
 		<!-- <span class="sr-only">
 			{{ $t('EXPLANATION-CLOCK-FACE') }}
@@ -68,3 +77,46 @@ export default defineComponent({
 	}
 });
 </script>
+
+<style lang="scss" scoped>
+.clock {
+	padding-bottom: 100%; // Weird hack, maakt dit een vierkant...
+}
+
+.clock-pointer {
+	--local-size: 3px;
+
+	width: var(--local-size);
+	bottom: calc(50% - calc(var(--local-size) / 2));
+	left: calc(50% - calc(var(--local-size) / 2));
+
+	transform-origin: bottom;
+	will-change: transform;
+
+	&--hour {
+		height: 30%;
+	}
+
+	&--minutes {
+		height: 40%;
+	}
+
+	&--seconds {
+		height: 50%;
+
+		transition: transform 1000ms linear;
+	}
+}
+
+.clock-center {
+	--local-size: 13px;
+
+	top: calc(50% - calc(var(--local-size) / 2));
+	left: calc(50% - calc(var(--local-size) / 2));
+
+	width: var(--local-size);
+	height: var(--local-size);
+
+	border: 3px solid var(--global-theme-color);
+}
+</style>
