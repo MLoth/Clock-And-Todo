@@ -104,7 +104,7 @@ export default defineComponent({
 	&--seconds {
 		height: 50%;
 
-		transition: transform 1000ms linear;
+		// transition: transform 1000ms linear;
 	}
 }
 
