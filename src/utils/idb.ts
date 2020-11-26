@@ -1,6 +1,9 @@
 // TODO: Make more generic
 // TODO: Look for type annotation IDB Transaction callbacks
 
+import Todo from '@/models/Todo';
+import { reactive, toRef } from 'vue';
+
 const DB_NAME: string = "tododb",
 	DB_VERSION: number = 1;
 let DB: IDBDatabase;
@@ -56,7 +59,7 @@ export default {
 		});
 	},
 
-	async getIdbItems(entity: string) {
+	async getItems(entity: string): Promise<any> {
 		let db = await this.getDb();
 
 		return new Promise(resolve => {
@@ -69,8 +72,6 @@ export default {
 				resolve(genericItems);
 			};
 
-
-
 			store.openCursor().onsuccess = (e: any): void => {
 				let cursor = e.target.result;
 				if (cursor) {
@@ -81,13 +82,13 @@ export default {
 		});
 	},
 
-	async saveTodo(todo: any) {
+	async saveTodo(todo: Todo) {
 		let db = await this.getDb();
 
 		return new Promise(resolve => {
 			let trans: IDBTransaction = db.transaction(["todos"], "readwrite");
-			trans.oncomplete = () => {
-				resolve();
+			trans.oncomplete = (e: any) => {
+				resolve(e);
 			};
 
 			let store = trans.objectStore("todos");
