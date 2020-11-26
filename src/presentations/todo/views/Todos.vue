@@ -3,7 +3,13 @@
 		<header class="sticky top-0 pt-3 pb-6 bg-opacity-75 bg-white">
 			<div class="flex justify-between items-start">
 				<p class="mt-3">
-					On <span class="underline">Monday 19 March</span>
+					<span class="underline"
+						>{{ $t(getKeyofCurrentDay(new Date().getDay())) }}
+						{{ new Date().getDate() }}
+						{{
+							$t(getKeyofCurrentMonth(new Date().getMonth()))
+						}}</span
+					>
 				</p>
 				<router-link
 					to="/"
@@ -23,7 +29,9 @@
 					<!-- TODO: make icon: iconsvg.xyz -->
 				</router-link>
 			</div>
-			<p class="text-3xl font-semibold">You need to...</p>
+			<p class="text-3xl font-semibold">
+				{{ $t("TITLE-OVERVIEW") }}
+			</p>
 
 			<div class="flex">
 				<aside class="flex items-center w-1/12">
@@ -85,6 +93,11 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 
+import {
+	getKeyofCurrentDay,
+	getKeyofCurrentMonth
+} from "@/utils/dataFormatting";
+
 import Todo from "@/models/Todo";
 import idb from "@/utils/idb";
 
@@ -132,7 +145,10 @@ export default defineComponent({
 			todo,
 			todos,
 
-			addTodo
+			addTodo,
+
+			getKeyofCurrentDay,
+			getKeyofCurrentMonth
 		};
 	}
 });

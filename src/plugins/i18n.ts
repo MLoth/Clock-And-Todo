@@ -1,9 +1,11 @@
 import { createI18n } from 'vue-i18n';
 
+export const locales = ['en', 'nl', 'ru', 'zh'];
+
 const i18n = new (createI18n as any)({
-    locale: 'en',
-    messages: {},
-    availableLocales: ['en', 'nl', 'ru', 'zh']
+	locale: 'en',
+	messages: {},
+	availableLocales: locales
 });
 
 /**
@@ -11,7 +13,8 @@ const i18n = new (createI18n as any)({
  */
 
 export async function loadMessages(locale: string) {
-    const messages = await import(/* webpackChunkName: "lang-[request]" */ `@/locales/${locale}`); // Dynamically get a locale
+	const messages = await import(/* webpackChunkName: "lang-[request]" */ `@/locales/${locale}`); // Dynamically get a locale
+
     i18n.global.setLocaleMessage(locale, messages);
 
     if (i18n.locale !== locale) {
