@@ -2,7 +2,6 @@
 // TODO: Look for type annotation IDB Transaction callbacks
 
 import Todo from '@/models/Todo';
-import { reactive, toRef } from 'vue';
 
 const DB_NAME: string = "tododb",
 	DB_VERSION: number = 1;

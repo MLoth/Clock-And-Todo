@@ -7,8 +7,19 @@
 				</p>
 				<router-link
 					to="/"
-					class="text-theme leading-none font-semibold rounded-full p-3 block hover:bg-gray-200"
-					>x
+					class="text-theme leading-none font-semibold rounded-full p-2 block hover:bg-gray-200"
+				>
+					<svg
+						class="w-4 h-4 stroke-1 stroke-current text-theme"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
 					<!-- TODO: make icon: iconsvg.xyz -->
 				</router-link>
 			</div>
@@ -59,6 +70,15 @@
 				</div>
 			</div>
 		</main>
+
+		<div class="my-2">
+			<router-link
+				to="/settings"
+				class="opacity-50 hover:opacity-100 text-xs"
+			>
+				{{ $t("TITLE-SETTINGS") }}
+			</router-link>
+		</div>
 	</div>
 </template>
 
