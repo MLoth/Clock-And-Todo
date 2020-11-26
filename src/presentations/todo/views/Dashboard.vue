@@ -7,8 +7,8 @@
 				{{ $t(monthOfTheYear) }}
 				<router-link
 					to="/todos"
-					class="inline-block text-white bg-theme rounded-full leading-none p-2 ml-2"
-					>19</router-link
+					class="inline-block text-sm text-white bg-theme rounded-full leading-none p-2 ml-2"
+					>{{ itemsLength }}</router-link
 				>
 			</p>
 		</header>
@@ -35,6 +35,9 @@ import {
 	getKeyofCurrentDay,
 	getKeyofCurrentMonth
 } from "@/utils/dataFormatting";
+
+import idb from "@/utils/idb";
+
 import ClockFace from "../components/ClockFace.vue";
 
 export default defineComponent({
@@ -49,6 +52,17 @@ export default defineComponent({
 			)}`
 		);
 
+		let itemsLength: Ref<number> = ref(0);
+
+		const getItemsLength = async () => {
+			const items = await idb.getItems("todos");
+			console.log(items);
+
+			itemsLength.value = items ? items.length : 0;
+		};
+
+		getItemsLength();
+
 		const dayOfTheWeek: string = getKeyofCurrentDay(new Date().getDay());
 		const monthOfTheYear: string = getKeyofCurrentMonth(
 			new Date().getMonth()
@@ -57,7 +71,8 @@ export default defineComponent({
 		return {
 			now,
 			dayOfTheWeek,
-			monthOfTheYear
+			monthOfTheYear,
+			itemsLength
 		};
 	}
 });
